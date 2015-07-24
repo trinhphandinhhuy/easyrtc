@@ -32,6 +32,7 @@ config.serverLogConsoleColorEnable = true;
 config.serverLogExpressEnable = true;
 config.serverLogExpressLevel = "debug";
 config.serverLogExpressFormat = "dev";
+config.serverLogMessagesEnable = false;
 
 config.serverLogFile = "server.log";
 config.serverLogFileLevel = "debug";

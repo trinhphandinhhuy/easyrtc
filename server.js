@@ -37,7 +37,11 @@ graceApp.on("start", function () {
     httpApp.use(express.static(config.httpPublicRootFolder));
 
     easyrtc.on("log", function (level, logText, logFields) {
-        log.log(level, "EasyRTC: " + logText, logFields);
+        if (typeof logFields !== 'undefined') {
+            log.log(level, "EasyRTC: " + logText, logFields);
+        } else {
+            log.log(level, "EasyRTC: " + logText);
+        }
     });
 
     // Start Express http server
@@ -62,6 +66,7 @@ graceApp.on("start", function () {
     // Setting EasyRTC Options
     easyrtc.setOption("logLevel", config.serverLogConsoleLevel);
     easyrtc.setOption("logColorEnable", config.serverLogConsoleColorEnable);
+    easyrtc.setOption("logMessagesEnable", config.serverLogMessagesEnable);
     easyrtc.setOption("appIceServers", config.easyrtcAppIceServers);
 
     easyrtc.listen(httpApp, socketServer, null, function (err, newEasyrtcPub) {
