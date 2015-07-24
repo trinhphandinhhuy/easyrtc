@@ -59,6 +59,7 @@ graceApp.on("start", function () {
     } else {
         webServer = http.createServer(httpApp).listen(config.webServerPort);
     }
+    log.info("Sever will be listening on port ["+config.webServerPort+"]");
 
     // Start Socket.io so it attaches itself to Express server
     socketServer = socketIo.listen(webServer, {"log level": config.socketIoLogLevel});
