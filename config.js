@@ -26,6 +26,8 @@ config.sslCertFile = "./dev/ssl_self_signed/server.cert";
 config.expressLogFile = "express.log";
 config.expressLogExpressFormat = "combined";
 
+
+config.serverLogConsoleEnable = true;
 config.serverLogConsoleLevel = "debug";
 config.serverLogConsoleTimestampEnable = true;
 config.serverLogConsoleColorEnable = true;
@@ -34,9 +36,16 @@ config.serverLogExpressLevel = "debug";
 config.serverLogExpressFormat = "dev";
 config.serverLogMessagesEnable = false;
 
+config.serverLogFileEnable = true;
 config.serverLogFile = "server.log";
 config.serverLogFileLevel = "debug";
 config.serverLogFileTimestampEnable = true;
+
+config.serverLogLogstashEnable = false;
+config.serverLogLogstashLevel = "debug";
+config.serverLogLogstashHost = "127.0.0.1";
+config.serverLogLogstashPort = 9300;
+config.serverLogLogstashNodeName = "logstash";
 
 // Override options
 //noinspection JSLint

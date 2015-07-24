@@ -31,7 +31,8 @@
         "grace": "*",
         "morgan": "*",
         "socket.io": "*",
-        "winston": "*"
+        "winston": "*",
+        "winston-logstash": "*"
     },
 
     "analyze": false,
