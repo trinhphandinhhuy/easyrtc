@@ -3,7 +3,9 @@
 // Load required modules
 var fs          = require("fs");            // File system core module
 var http        = require("http");          // Http server core module
-var https       = require("https");        // Https server core module
+var https       = require("https");         // Https server core module
+var request     = require("request");
+
 var express     = require("express");       // Web framework module
 var socketIo    = require("socket.io");     // Web socket module
 var easyrtc     = require("easyrtc");       // EasyRTC module
@@ -43,6 +45,47 @@ graceApp.on("start", function () {
             log.log(level, "EasyRTC: " + logText);
         }
     });
+
+    if (config.serverStreamStackEnable) {
+        easyrtc.on("getIceConfig", function (connectionObj, callback) {
+            var url = config.serverStreamStackUrl;
+            var client_ip;
+
+            if (connectionObj.socket && connectionObj.socket.handshake && connectionObj.socket.handshake.address) {
+                client_ip = connectionObj.socket.handshake.address
+            }
+
+            url += config.serverStreamStackAccountId;
+            url += "/apikey/";
+            url += config.serverStreamStackApiKey;
+
+            var xForwardedFor = client_ip + ", " +  config.serverStreamStackServerIp;
+
+            log.info("Get IceConfig sending X-Forwarded-For: " + xForwardedFor);
+
+            log.info("Sending IceConfig request to : " + url);
+
+            request({
+                "url": url,
+                "method": "GET",
+                "json": true
+            }, function (error, response, body) {
+                if (!error && response.statusCode === 200) {
+                    log.info(response.body);
+                    try {
+                        callback(null, response.body.iceServers);
+                    } catch(err) {
+                        log.error("Error sending callback for getIceConfig: " + err);
+                    }
+                }
+                else {
+                    log.error("Error sending request: " + error);
+                    callback(null, config.easyrtcAppIceServers);
+                }
+            });
+        });
+    }
+
 
     // Start Express http server
     var webServer;

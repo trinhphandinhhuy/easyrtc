@@ -47,6 +47,12 @@ config.serverLogLogstashHost = "127.0.0.1";
 config.serverLogLogstashPort = 9300;
 config.serverLogLogstashNodeName = "logstash";
 
+config.serverStreamStackEnable = false;
+config.serverStreamStackServerIp = "127.0.0.1";
+config.serverStreamStackUrl = "";
+config.serverStreamStackAccountId = "";
+config.serverStreamStackApiKey = "";
+
 // Override options
 //noinspection JSLint
 if (require("fs").existsSync("./config_override.js")) {

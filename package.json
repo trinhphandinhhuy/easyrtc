@@ -30,6 +30,7 @@
         "express": "*",
         "grace": "*",
         "morgan": "*",
+        "request": "^2.67.0",
         "socket.io": "*",
         "winston": "*",
         "winston-logstash": "*"
