@@ -32,7 +32,10 @@
   "dependencies" : {
     "async"     : "0.2.x",
     "colors"    : "*",
-    "underscore": "1.5.x"
+    "underscore": "1.5.x",
+    "easyrtc"   : "1.0.x",
+    "express"   : "*",
+    "socket.io" : "0.9.x"
   },
 
   "analyze"     : false,
